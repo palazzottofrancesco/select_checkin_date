@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="template_booking_form" name="Booking Form">
+        <section class="s_snippet" data-snippet="internal">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <form action="/hotel/booking/submit" method="post" target="_blank">
+                            <!-- Aggiungi il campo hidden per il CSRF token -->
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <!-- Primo rigo: i quattro campi -->
+                            <div class="row align-items-center" style="gap: 2.6rem;">
+                                <div class="col-auto">
+                                    <label for="check_in" class="form-label visually-hidden">Check-In:</label>
+                                    <input type="date" id="check_in" name="check_in"
+                                           class="form-control form-control-lg"
+                                           style="font-size:1.15rem; height:calc(1.4em + 1.2rem + 0.70rem); max-width: calc(160px * 1.15); border-radius: 0;"
+                                           required="required"/>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="check_out" class="form-label visually-hidden">Check-Out:</label>
+                                    <input type="date" id="check_out" name="check_out"
+                                           class="form-control form-control-lg"
+                                           style="font-size:1.15rem; height:calc(1.4em + 1.2rem + 0.70rem); max-width: calc(160px * 1.15); border-radius: 0;"
+                                           required="required"/>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="guests" class="form-label visually-hidden">Numero ospiti:</label>
+                                    <input type="number" id="guests" name="guests" min="1" value=""
+                                           class="form-control form-control-lg"
+                                           style="font-size:1.20rem; height:calc(1.4em + 1.2rem + 0.70rem); max-width: calc(160px * 1.15); border-radius: 0;"
+                                           placeholder="Ospiti"/>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="children" class="form-label visually-hidden">Numero bambini:</label>
+                                    <input type="number" id="children" name="children" min="1" value=""
+                                           class="form-control form-control-lg"
+                                           style="font-size:1.20rem; height:calc(1.4em + 1.2rem + 0.70rem); max-width: calc(160px * 1.15); border-radius: 0;"
+                                           placeholder="Bambini"/>
+                                </div>
+                            </div>
+                            <!-- Secondo rigo: pulsante -->
+                            <div class="row justify-content-center mt-5">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary"
+                                            style="font-size:1rem; padding: 0.5rem 1rem; border-radius: 0;">CERCA STANZA</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+    <!-- Snippet statico di tipo "contenuto interno" per il form di prenotazione -->
+    <template id="snippet_booking_form_static" name="Booking Form Snippet Static (Contenuto Interno)" inherit_id="website.snippets">
+               <xpath expr="//*[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
+                   <t t-snippet="website_select_check_in.template_booking_form" string="Check-in/out"
+                      t-thumbnail="/website_select_check_in/static/src/date.jpeg" />
+                </xpath>
+    </template>
+
+
+    <template id="snippet_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <!-- data-drop-in and data-drop-near are jquery selectors ( $('.oe_structure, [class^=col-]') ) -->
+            <div data-selector=".s_snippet"
+                 data-drop-in=".oe_structure, [class^=col-]"
+                 data-drop-near="p, h1, h2, h3, blockquote"/>
+        </xpath>
+    </template>
+</odoo>
