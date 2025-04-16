@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from odoo import http
-from odoo.http import request, Response
+from odoo.http import Response
 from urllib.parse import quote
-from datetime import date, timedelta
+from datetime import datetime
 
 class SelectCheckInController(http.Controller):
 
-    @http.route('/hotel/booking/submit', auth='public', website=True, methods=['POST'])
+    @http.route('/hotel/booking/submit', auth='public', website=True, methods=['POST'], csrf=False)
     def hotel_booking_submit(self, **kwargs):
         check_in = kwargs.get('check_in')
         check_out = kwargs.get('check_out')

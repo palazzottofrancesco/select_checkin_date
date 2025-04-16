@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
-
 from odoo import models, fields
-from datetime import timedelta
 
 class SelectCheckIn(models.Model):
     _name = 'select.checkin'
-    _description = 'Hotel Reservation'
+    _description = 'Select Checkin'
 
-    name = fields.Char()
-    check_in = fields.Date()
-    check_out = fields.Date()
-    guests = fields.Integer()
-    children = fields.Integer()
+    # Usando selection, le opzioni sono una tupla (valore, etichetta)
+    # Impostiamo il default come stringa vuota.
+    guests = fields.Selection(
+        selection=[('', ''), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')],
+        string="Numero ospiti",
+        default=''
+    )
+    children = fields.Selection(
+        selection=[('', ''), ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')],
+        string="Numero bambini",
+        default=''
+    )
