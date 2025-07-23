@@ -3,6 +3,17 @@
 <odoo>
   <template id="template_booking_form" name="Booking Form">
       <section class="s_snippet booking_form_snippet" data-snippet="internal">
+          <style>
+              .booking_form_snippet select:invalid {
+                color: #6c757d;
+                font-family: 'Inter', sans-serif;
+              }
+              .booking_form_snippet input::placeholder {
+                color: #6c757d;
+                font-family: 'Inter', sans-serif;
+                opacity: 1;
+              }
+          </style>
           <div class="container my-5">
               <div class="row justify-content-center">
                   <div class="col-12 col-md-10 col-lg-12">
