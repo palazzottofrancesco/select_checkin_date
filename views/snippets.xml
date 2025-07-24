@@ -1,107 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <odoo>
+  <!-- 1) Snippet principale -->
   <template id="template_booking_form" name="Booking Form">
-      <section class="s_snippet booking_form_snippet" data-snippet="internal">
-          <style>
-              .booking_form_snippet select:invalid {
-                color: #6c757d;
-                font-family: 'Inter', sans-serif;
-              }
-              .booking_form_snippet input::placeholder {
-                color: #6c757d;
-                font-family: 'Inter', sans-serif;
-                opacity: 1;
-              }
-          </style>
-          <div class="container my-5">
-              <div class="row justify-content-center">
-                  <div class="col-12 col-md-10 col-lg-12">
-                      <form action="/hotel/booking/submit" method="post" target="_blank">
-                          <!-- Campo hidden per il CSRF token -->
-                          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                          <!-- Primo rigo: i quattro campi, distribuiti in colonne uguali -->
-                          <div class="row align-items-center justify-content-center">
-                              <!-- Check-In -->
-                              <div class="col-6 col-md-3">
-                                  <label for="check_in" class="form-label visually-hidden">Check-In:</label>
-                                  <input type="text" id="check_in" name="check_in"
-                                         class="form-control form-control-lg"
-                                         placeholder="Check-in"
-                                         onfocus="this.type='date'"
-                                         onblur="if(!this.value) this.type='text';"
-                                         style="font-size:1.15rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;"
-                                         required="required"/>
-                              </div>
-                              <!-- Check-Out -->
-                              <div class="col-6 col-md-3">
-                                  <label for="check_out" class="form-label visually-hidden">Check-Out:</label>
-                                  <input type="text" id="check_out" name="check_out"
-                                         class="form-control form-control-lg"
-                                         placeholder="Check-out"
-                                         onfocus="this.type='date'"
-                                         onblur="if(!this.value) this.type='text';"
-                                         style="font-size:1.15rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;"
-                                         required="required"/>
-                              </div>
-                              <!-- Ospiti (select) -->
-                              <div class="col-6 col-md-3">
-                                  <select id="guests" name="guests"
-                                          class="form-control form-control-lg"
-                                          required="required"
-                                          style="font-size:1.25rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;">
-                                      <option value="" disabled="disabled" selected="selected" hidden="hidden">Ospiti</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                  </select>
-                              </div>
-                              <!-- Bambini (select) -->
-                              <div class="col-6 col-md-3">
-                                  <select id="children" name="children"
-                                          class="form-control form-control-lg"
-                                          required="required"
-                                          style="font-size:1.25rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;">
-                                      <option value="" disabled="disabled" selected="selected" hidden="hidden">Bambini</option>
-                                      <option value="0">0</option>
-                                      <option value="1">1</option>
-                                      <option value="2">2</option>
-                                      <option value="3">3</option>
-                                      <option value="4">4</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <!-- Secondo rigo: pulsante, centrato e con margine superiore maggiore -->
-                          <div class="row justify-content-center mt-5">
-                              <div class="col-auto">
-                                  <button type="submit" class="btn btn-primary"
-                                          style="font-size:1rem; padding: 0.5rem 1rem; border-radius: 0;">CERCA STANZA</button>
-                              </div>
-                          </div>
-                      </form>
+    <section class="s_snippet booking_form_snippet" data-snippet="internal">
+      <div class="container my-5">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-12">
+            <form action="/hotel/booking/submit" method="post" target="_blank">
+              <!-- CSRF token -->
+              <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+              <div class="row align-items-start justify-content-center">
+                <!-- Check-In -->
+                <div class="col-6 col-md-3">
+                  <div class="mb-3">
+                    <label for="check_in" class="form-label">Check-in</label>
+                    <input type="date"
+                           id="check_in"
+                           name="check_in"
+                           class="form-control form-control-lg"
+                           style="font-size:1.15rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;"
+                           required="required"/>
                   </div>
+                </div>
+                <!-- Check-Out -->
+                <div class="col-6 col-md-3">
+                  <div class="mb-3">
+                    <label for="check_out" class="form-label">Check-out</label>
+                    <input type="date"
+                           id="check_out"
+                           name="check_out"
+                           class="form-control form-control-lg"
+                           style="font-size:1.15rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;"
+                           required="required"/>
+                  </div>
+                </div>
+                <!-- Ospiti -->
+                <div class="col-6 col-md-3">
+                  <div class="mb-3">
+                    <label for="guests" class="form-label">Ospiti</label>
+                    <select id="guests" name="guests"
+                            class="form-control form-control-lg"
+                            required="required"
+                            style="font-size:1.25rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Bambini -->
+                <div class="col-6 col-md-3">
+                  <div class="mb-3">
+                    <label for="children" class="form-label">Bambini</label>
+                    <select id="children" name="children"
+                            class="form-control form-control-lg"
+                            required="required"
+                            style="font-size:1.25rem; height: calc(1.4em + 1.2rem + 0.70rem); border-radius: 0; width: 100%;">
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                  </div>
+                </div>
               </div>
+
+              <div class="row justify-content-center mt-4">
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary btn-lg"
+                          style="font-size:1rem; padding: 0.5rem 1rem; border-radius: 0;">
+                    CERCA STANZA
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
-      </section>
+        </div>
+      </div>
+    </section>
   </template>
 
-    <!-- Snippet statico di tipo "contenuto interno" per il form di prenotazione -->
-    <template id="snippet_booking_form_static" name="Booking Form Snippet Static (Contenuto Interno)" inherit_id="website.snippets">
-               <xpath expr="//snippets[@id='snippet_content']/*[1]" position="before">
-                   <t t-snippet="website_select_check_in.template_booking_form" string="Check-in/out"
-                      t-thumbnail="/website_select_check_in/static/src/date.jpeg" />
-                </xpath>
-    </template>
+  <!-- 2) Snippet statico per il builder -->
+  <template id="snippet_booking_form_static"
+            name="Booking Form Snippet Static (Contenuto Interno)"
+            inherit_id="website.snippets">
+    <xpath expr="//snippets[@id='snippet_content']/*[1]" position="before">
+      <t t-snippet="website_select_check_in.template_booking_form"
+         string="Check-in/out"
+         t-thumbnail="/website_select_check_in/static/src/img/date.jpeg"/>
+    </xpath>
+  </template>
 
-
-    <template id="snippet_options" inherit_id="website.snippet_options">
-        <xpath expr="." position="inside">
-            <!-- data-drop-in and data-drop-near are jquery selectors ( $('.oe_structure, [class^=col-]') ) -->
-            <div data-selector=".s_snippet"
-                 data-drop-in=".oe_structure, [class^=col-]"
-                 data-drop-near="p, h1, h2, h3, blockquote"/>
-        </xpath>
-    </template>
-
+  <!-- 3) Opzioni drag’n’drop -->
+  <template id="snippet_options" inherit_id="website.snippet_options">
+    <xpath expr="." position="inside">
+      <div data-selector=".s_snippet"
+           data-drop-in=".oe_structure, [class^=col-]"
+           data-drop-near="p, h1, h2, h3, blockquote"/>
+    </xpath>
+  </template>
 </odoo>
